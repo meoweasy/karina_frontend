@@ -1,0 +1,19 @@
+@use "main" as vars;
+
+.page.footer {
+  height: 70px;
+  background-color: vars.$color_black_light;
+}
+
+.page_container.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 70px;
+}
+
+@media screen and (max-width: 1070px) {
+  .page_container.footer {
+    width: 90%;
+  }
+}

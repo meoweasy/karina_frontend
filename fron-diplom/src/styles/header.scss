@@ -1,0 +1,156 @@
+@use "main" as vars;
+
+.header_component {
+  width: 100%;
+  height: 70px;
+  background-color: vars.$color_black;
+  position: relative;
+  z-index: 10;
+}
+
+.header_container {
+  width: 1070px;
+  height: 70px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header_nav_container {
+  font-family: "Montserrat", serif;
+  font-weight: 600;
+  margin-left: auto;
+  margin-right: 0px;
+}
+
+.nav_item {
+  text-decoration: none;
+  color: white;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: color 0.5s ease-out;
+}
+
+.nav_item:hover {
+  color: #5862b4;
+}
+
+.login_btn {
+  margin-left: 10px;
+  margin-right: 0px;
+  background: vars.$color_black_light;
+  border-radius: 999px;
+  box-shadow: #2c6abb59 0 -25px 18px -14px inset,
+    rgba(65, 83, 185, 0.25) 0 1px 2px, rgba(44, 89, 187, 0.25) 0 2px 4px,
+    rgba(44, 46, 187, 0.25) 0 4px 8px, rgba(53, 44, 187, 0.25) 0 8px 16px,
+    rgba(44, 58, 187, 0.25) 0 16px 32px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: "Montserrat", serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+  transition: transform 0.5s ease-out;
+}
+
+.login_btn:hover {
+  transform: scale(1.05);
+}
+
+// Навигация в мобильной версии
+.burger_menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 25px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-right: 0px;
+  margin-left: 15px;
+}
+
+.burger_menu span {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background: white;
+  transition: 0.3s;
+}
+
+.burger_menu.open span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px) translateX(6px);
+}
+
+.burger_menu.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger_menu.open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px) translateX(6px);
+}
+
+.mobile_nav {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background: vars.$color_black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  z-index: 3;
+}
+
+.mobile_nav .nav_item {
+  color: white;
+  font-family: "Montserrat", serif;
+  font-weight: 500;
+  font-size: 20px;
+  margin: 15px 0;
+  transition: color 0.5s ease-out;
+}
+
+.mobile_nav .nav_item:hover {
+  color: #5862b4;
+}
+
+// Адаптивность
+@media screen and (max-width: 1300px) {
+  .header_container {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .header_container {
+    width: 90%;
+  }
+  .header_nav_container {
+    display: none;
+  }
+  .login_btn {
+    margin-right: 0px;
+    margin-left: auto;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .burger_menu {
+    display: none;
+  }
+}
