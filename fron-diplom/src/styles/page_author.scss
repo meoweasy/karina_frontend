@@ -90,6 +90,12 @@
 
   .nav_item {
     margin-left: 20px;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
   }
 }
 
