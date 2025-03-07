@@ -32,12 +32,12 @@ const AuthorPage = ({
           <img src={image_author} alt={fio_author} />
         </div>
         <div className="author_navigation_cont">
-          <a className="nav_item" href="#">
+          <button className="nav_item" onClick={() => setIsHomepageOpen(true)}>
             Профиль
-          </a>
-          <a className="nav_item" href="#">
+          </button>
+          <button className="nav_item" onClick={() => setIsHomepageOpen(false)}>
             Публикации
-          </a>
+          </button>
         </div>
       </div>
 
