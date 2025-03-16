@@ -1,0 +1,161 @@
+{
+    "authors": [
+        {
+            "id": 1,
+            "fio_author": "Андрей Смирнов",
+            "num_public": 10,
+            "desc_author": "Специалист по машинному обучению и нейросетям. Разрабатывает AI-алгоритмы для анализа данных.",
+            "header_image": "https://i.pinimg.com/originals/46/6c/4d/466c4d0ec2824e15ff7def79f8ec2789.png",
+            "image_author": "https://t4.ftcdn.net/jpg/02/00/53/77/360_F_200537776_KzTIOQB6oXT9K2p8XoC3P3i9922gFMfP.jpg",
+            "categories": [
+                {
+                    "id": 1,
+                    "name": "Основы программирования"
+                },
+                {
+                    "id": 5,
+                    "name": "Блокчейн"
+                },
+                {
+                    "id": 3,
+                    "name": "Блокчейн2"
+                },
+                {
+                    "id": 4,
+                    "name": "Блокчейн4"
+                },
+                {
+                    "id": 6,
+                    "name": "Блокчейн6"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "fio_author": "Екатерина Иванова",
+            "num_public": 10,
+            "desc_author": "Фулл-стек разработчик, эксперт в JavaScript, React и Node.js.",
+            "header_image": "https://avatars.mds.yandex.net/i?id=ad43fde0e99a2b701041bb8c3b5ac906_l-5185705-images-thumbs&n=13",
+            "image_author": "https://avatars.dzeninfra.ru/get-zen_doc/4452915/pub_60780db1b98df9344e1979c8_607823e944421f3885f7fa2f/scale_1200",
+            "categories": [
+                {
+                    "id": 1,
+                    "name": "Основы программирования"
+                },
+                {
+                    "id": 5,
+                    "name": "Блокчейн"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "fio_author": "Максим Петров",
+            "num_public": 10,
+            "desc_author": "Разработчик ПО с опытом в C++, Rust и системном программировании.",
+            "header_image": "https://wallpapers.com/images/hd/glowing-blue-light-hexagon-in-black-tyk6qvhbjwzgkuf1.jpg",
+            "image_author": "https://avatars.mds.yandex.net/i?id=320678a591f137d7cf358b47cd5d8f1d_l-4937889-images-thumbs&n=13",
+            "categories": [
+                {
+                    "id": 1,
+                    "name": "Основы программирования"
+                },
+                {
+                    "id": 5,
+                    "name": "Блокчейн"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "fio_author": "Ольга Сидорова",
+            "num_public": 10,
+            "desc_author": "Специалист по кибербезопасности, работает с защитой данных и криптографией.",
+            "header_image": "https://steamuserimages-a.akamaihd.net/ugc/307738934717377183/F8DB2D4CB62F014D421CEE86BCD53EF6F3ED39BB/?imw=512&amp;imh=288&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true",
+            "image_author": "https://149357281.v2.pressablecdn.com/wp-content/uploads/2022/11/SAP_Technology_Consultant-scaled.jpg",
+            "categories": [
+                {
+                    "id": 1,
+                    "name": "Основы программирования"
+                },
+                {
+                    "id": 5,
+                    "name": "Блокчейн"
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "fio_author": "Дмитрий Козлов",
+            "num_public": 10,
+            "desc_author": "DevOps-инженер, автоматизирует процессы CI/CD и управляет облачными сервисами.",
+            "header_image": "https://i.pinimg.com/originals/ba/85/b9/ba85b9e65220733edc60f81362fcb93a.jpg",
+            "image_author": "https://avatars.mds.yandex.net/i?id=45eefbd38df8fd6f2eababf6db4dc312_l-3237927-images-thumbs&n=13",
+            "categories": [
+                {
+                    "id": 1,
+                    "name": "Основы программирования"
+                },
+                {
+                    "id": 5,
+                    "name": "Блокчейн"
+                }
+            ]
+        }
+        ,
+        {
+            "id": 6,
+            "fio_author": "Дмитрий Козлов",
+            "num_public": 10,
+            "desc_author": "DevOps-инженер, автоматизирует процессы CI/CD и управляет облачными сервисами.",
+            "header_image": "https://i.pinimg.com/originals/ba/85/b9/ba85b9e65220733edc60f81362fcb93a.jpg",
+            "image_author": "https://avatars.mds.yandex.net/i?id=45eefbd38df8fd6f2eababf6db4dc312_l-3237927-images-thumbs&n=13",
+            "categories": [
+                {
+                    "id": 1,
+                    "name": "Основы программирования"
+                },
+                {
+                    "id": 5,
+                    "name": "Блокчейн"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "fio_author": "Дмитрий Козлов",
+            "num_public": 10,
+            "desc_author": "DevOps-инженер, автоматизирует процессы CI/CD и управляет облачными сервисами.",
+            "header_image": "https://i.pinimg.com/originals/ba/85/b9/ba85b9e65220733edc60f81362fcb93a.jpg",
+            "image_author": "https://avatars.mds.yandex.net/i?id=45eefbd38df8fd6f2eababf6db4dc312_l-3237927-images-thumbs&n=13",
+            "categories": [
+                {
+                    "id": 1,
+                    "name": "Основы программирования"
+                },
+                {
+                    "id": 5,
+                    "name": "Блокчейн"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "fio_author": "Дмитрий Козлов",
+            "num_public": 10,
+            "desc_author": "DevOps-инженер, автоматизирует процессы CI/CD и управляет облачными сервисами.",
+            "header_image": "https://i.pinimg.com/originals/ba/85/b9/ba85b9e65220733edc60f81362fcb93a.jpg",
+            "image_author": "https://avatars.mds.yandex.net/i?id=45eefbd38df8fd6f2eababf6db4dc312_l-3237927-images-thumbs&n=13",
+            "categories": [
+                {
+                    "id": 1,
+                    "name": "Основы программирования"
+                },
+                {
+                    "id": 5,
+                    "name": "Блокчейн"
+                }
+            ]
+        }
+    ]
+}

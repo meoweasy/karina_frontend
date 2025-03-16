@@ -1,5 +1,4 @@
 import { MdOutlineArrowForwardIos } from "react-icons/md";
-import WordCloud from "react-wordcloud";
 import {
   BarChart,
   Bar,
@@ -12,7 +11,8 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "/node_modules/swiper/swiper-bundle.min.css";
 import { Navigation, Pagination } from "swiper/modules";
-import { useEffect, useRef } from "react";
+import WordCloud from "./word_cloud";
+import { Word } from "./word_cloud";
 
 type AuthorHomepageProps = {
   collab_name?: string;
@@ -35,7 +35,7 @@ const AuthorHomepage = ({
   years_public_one,
   years_public_two,
 }: AuthorHomepageProps) => {
-  const words = [
+  const words: Word[] = [
     { text: "Машинное обучение", value: 50 },
     { text: "Кибербезопасность", value: 40 },
     { text: "Веб-разработка", value: 35 },
@@ -47,12 +47,6 @@ const AuthorHomepage = ({
     { text: "Интернет вещей", value: 20 },
     { text: "Анализ данных", value: 20 },
   ];
-
-  const options = {
-    rotations: 1,
-    rotationAngles: [-90, 0] as [number, number],
-    fontSizes: [30, 70] as [number, number],
-  };
 
   const data = [
     { year: 2015, count: 30 },
@@ -67,7 +61,7 @@ const AuthorHomepage = ({
     { year: 2024, count: 70 },
   ];
 
-  const words2 = [
+  const words2: Word[] = [
     { text: "Алгоритмы", value: 50 },
     { text: "Машинное обучение", value: 40 },
     { text: "Веб-разработка", value: 35 },
@@ -79,12 +73,6 @@ const AuthorHomepage = ({
     { text: "Интернет вещей", value: 20 },
     { text: "Анализ данных", value: 20 },
   ];
-
-  const options2 = {
-    rotations: 1,
-    rotationAngles: [0, 0] as [number, number],
-    fontSizes: [30, 70] as [number, number],
-  };
 
   const cards = [
     {
@@ -209,8 +197,8 @@ const AuthorHomepage = ({
             <div className="rect_title"></div>
             <div className="text">Предметные области</div>
           </div>
-          <div style={{ width: "100%", height: "600px" }}>
-            <WordCloud words={words} options={options} />
+          <div style={{ width: "100%", height: "100%" }}>
+            <WordCloud words={words} />
           </div>
         </div>
 
@@ -241,8 +229,8 @@ const AuthorHomepage = ({
             <div className="rect_title"></div>
             <div className="text">Ключевые слова</div>
           </div>
-          <div style={{ width: "100%", height: "300px" }}>
-            <WordCloud words={words2} options={options2} />
+          <div style={{ width: "100%", height: "100%" }}>
+            <WordCloud words={words2}/>
           </div>
         </div>
       </div>
@@ -308,7 +296,10 @@ const AuthorHomepage = ({
         </div>
       </div>
 
-      <div className="page_container bio" style={{ marginTop: "100px", marginBottom: "100px" }}>
+      <div
+        className="page_container bio"
+        style={{ marginTop: "100px", marginBottom: "100px" }}
+      >
         <div className="author_title_cont">
           <div className="rect_title"></div>
           <div className="text">Биография</div>

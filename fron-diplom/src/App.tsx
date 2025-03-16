@@ -1,20 +1,24 @@
 import "./styles/main.scss";
 import Header from "./components/header";
-import AuthorPage from "./pages/author";
+import HomePage from "./pages/home";
 import Footer from "./components/footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AuthorPage from "./pages/author";
+import PublicationPage from "./pages/publication";
+import ListAuthor from "./pages/list_author";
 
 function App() {
   return (
-    <>
+    <Router>
       <Header />
-      <AuthorPage
-        header_image="https://avatars.mds.yandex.net/i?id=4cd0cb13f46031bc22e9be6bcd199074_l-7761368-images-thumbs&n=13"
-        fio_author="Иванов Иван Иванович"
-        desc_author="Краткое описание чем занимается автор, что ему интересно и с чем работает. Что-то еще можно сюда же написать. Необходимо придумать"
-        image_author="https://cdn.forbes.ru/forbes-static/c/1824x1026/new/2023/10/1-GettyImages-755650739-6529480935f2d.jpg"
-      />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/author/:id" element={<AuthorPage />} />
+        <Route path="/publication/:publicationid" element={<PublicationPage />} />
+        <Route path="/list_authors" element={<ListAuthor />} />
+      </Routes>
       <Footer />
-    </>
+    </Router>
   );
 }
 
