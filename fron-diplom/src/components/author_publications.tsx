@@ -116,7 +116,6 @@ const AuthorPublications = ({ authorId }: AuthorPublicationsProps) => {
     setCurrentPage(1);
     setKeyword(keyword_props);
     setPublications(filtered);
-    setSelectedCategories([]);
     setStartDate(null);
     setEndDate(null);
   };

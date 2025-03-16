@@ -146,8 +146,6 @@ const ListAuthor = () => {
     setCurrentPage(1);
     setKeyword(keyword_props);
     setAuthors(filtered);
-    setNumPublic([0, 100]);
-    setSelectedCategories([]);
   };
 
   // пагинация
