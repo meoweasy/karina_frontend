@@ -92,6 +92,7 @@ const AuthorPage = () => {
           resercherid_src={author.resercherid_src}
           scopusid_src={author.scopusid_src}
           scienceid_src={author.scienceid_src}
+          setIsHomepageOpen={setIsHomepageOpen}
         />
       ) : (
         <AuthorPublications authorId={Number(id)} />

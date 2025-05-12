@@ -40,6 +40,7 @@ type AuthorHomepageProps = {
   resercherid_src?: string;
   scopusid_src?: string;
   scienceid_src?: string;
+  setIsHomepageOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const AuthorHomepage = ({
@@ -63,7 +64,8 @@ const AuthorHomepage = ({
   orcid_src,
   resercherid_src,
   scopusid_src,
-  scienceid_src
+  scienceid_src,
+  setIsHomepageOpen
 }: AuthorHomepageProps) => {
   const words: Word[] = [
     { text: "Машинное обучение", value: 50 },
@@ -324,7 +326,7 @@ const AuthorHomepage = ({
         <div
           style={{ width: "100%", display: "flex", justifyContent: "center" }}
         >
-          <button className="learn-more">
+          <button className="learn-more" onClick={() => setIsHomepageOpen(false)}>
             <span className="circle" aria-hidden="true">
               <span className="icon arrow"></span>
             </span>
