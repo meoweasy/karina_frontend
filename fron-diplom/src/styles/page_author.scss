@@ -429,6 +429,28 @@ button.learn-more {
   z-index: -1; 
 }
 
+.contact_item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.contact_text{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  font-family: "Montserrat", serif;
+}
+
+.contact_href{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  font-family: "Montserrat", serif;
+  margin-left: 10px;
+}
+
 // Адаптив
 @media screen and (max-width: 1070px) {
   .image_author {

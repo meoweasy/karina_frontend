@@ -11,6 +11,19 @@ interface Author {
   image_author: string;
   header_image: string;
   desc_author: string;
+  email?: string;
+  tg?: string;
+  spinid?: number;
+  orcid?: number;
+  resercherid?: number;
+  scopusid?: number;
+  scienceid?: number;
+  tg_src?: string;
+  spinid_src?: string;
+  orcid_src?: string;
+  resercherid_src?: string;
+  scopusid_src?: string;
+  scienceid_src?: string;
 }
 
 const AuthorPage = () => {
@@ -66,6 +79,19 @@ const AuthorPage = () => {
           num_public="37"
           years_public_one="1998"
           years_public_two="2024"
+          email={author.email}
+          tg={author.tg}
+          spinid={author.spinid}
+          orcid={author.orcid}
+          resercherid={author.resercherid}
+          scopusid={author.scopusid}
+          scienceid={author.scienceid}
+          tg_src={author.tg_src}
+          spinid_src={author.spinid_src}
+          orcid_src={author.orcid_src}
+          resercherid_src={author.resercherid_src}
+          scopusid_src={author.scopusid_src}
+          scienceid_src={author.scienceid_src}
         />
       ) : (
         <AuthorPublications authorId={Number(id)} />

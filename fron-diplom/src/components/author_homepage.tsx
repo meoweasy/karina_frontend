@@ -13,6 +13,10 @@ import "/node_modules/swiper/swiper-bundle.min.css";
 import { Navigation, Pagination } from "swiper/modules";
 import WordCloud from "./word_cloud";
 import { Word } from "./word_cloud";
+import MapChart from "./MapChart";
+import quotesData from '../datatest/quotes.json';
+
+const quotes = quotesData.quotes;
 
 type AuthorHomepageProps = {
   collab_name?: string;
@@ -23,6 +27,19 @@ type AuthorHomepageProps = {
   num_public?: string;
   years_public_one?: string;
   years_public_two?: string;
+  email?: string;
+  tg?: string;
+  spinid?: number;
+  orcid?: number;
+  resercherid?: number;
+  scopusid?: number;
+  scienceid?: number;
+  tg_src?: string;
+  spinid_src?: string;
+  orcid_src?: string;
+  resercherid_src?: string;
+  scopusid_src?: string;
+  scienceid_src?: string;
 };
 
 const AuthorHomepage = ({
@@ -34,6 +51,19 @@ const AuthorHomepage = ({
   num_public,
   years_public_one,
   years_public_two,
+  email,
+  tg,
+  spinid,
+  orcid,
+  resercherid,
+  scopusid,
+  scienceid,
+  tg_src,
+  spinid_src,
+  orcid_src,
+  resercherid_src,
+  scopusid_src,
+  scienceid_src
 }: AuthorHomepageProps) => {
   const words: Word[] = [
     { text: "Машинное обучение", value: 50 },
@@ -239,6 +269,13 @@ const AuthorHomepage = ({
         className="page_container slider_author"
         style={{ marginTop: "100px" }}
       >
+        <MapChart quotes={quotes} />
+      </div>
+
+      <div
+        className="page_container slider_author"
+        style={{ marginTop: "100px" }}
+      >
         <div className="author_title_cont">
           <div className="rect_title"></div>
           <div className="text">Популярные статьи</div>
@@ -325,6 +362,50 @@ const AuthorHomepage = ({
           участвуя в конференциях и ведя технический блог. Верю, что
           программирование — это не просто код, а инструмент, который меняет
           мир.
+        </div>
+      </div>
+
+      <div
+        className="page_container bio"
+        style={{ marginTop: "0px", marginBottom: "100px" }}
+      >
+        <div className="author_title_cont">
+          <div className="rect_title"></div>
+          <div className="text">Контакты</div>
+        </div>
+        <div className="contact_author">
+          <div className="contact_item">
+            <div className="contact_text">Почта:</div>
+            <div className="contact_href">{email}</div>
+          </div>
+          <div className="contact_item">
+            <div className="contact_text">Телеграм:</div>
+            <a className="contact_href" href={tg_src} target="_blank">{tg}</a>
+          </div>
+          <div className="contact_item">
+            <div className="contact_text">SPIN-код РИНЦ:</div>
+            <a className="contact_href" href={spinid_src} target="_blank">{spinid}</a>
+          </div>
+          <div className="contact_item">
+            <div className="contact_text">ORCID:</div>
+            <a className="contact_href" href={orcid_src} target="_blank">{orcid}</a>
+          </div>
+          <div className="contact_item">
+            <div className="contact_text">ResearcherID:</div>
+            <a className="contact_href" href={resercherid_src} target="_blank">{resercherid}</a>
+          </div>
+          <div className="contact_item">
+            <div className="contact_text">Scopus AuthorID:</div>
+            <a className="contact_href" href={scopusid_src} target="_blank">{scopusid}</a>
+          </div>
+          <div className="contact_item">
+            <div className="contact_text">Science ID:</div>
+            <a className="contact_href" href={scienceid_src} target="_blank">{scienceid}</a>
+          </div>
+          <div className="contact_item">
+            <div className="contact_text">ResearchGate:</div>
+            <a className="contact_href" href={resercherid_src} target="_blank">{resercherid}</a>
+          </div>
         </div>
       </div>
 

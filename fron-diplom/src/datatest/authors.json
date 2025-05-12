@@ -28,7 +28,21 @@
                     "id": 6,
                     "name": "Блокчейн6"
                 }
-            ]
+            ],
+            "email": "name@mail.ru",
+            "tg": "@tg_name",
+            "spinid": 1111,
+            "orcid": 2222,
+            "researcherid": 3333,
+            "scopus": 4444,
+            "scienceid": 5555,
+            "tg_src": "https://t.me/tg_name",
+            "spinid_src": "https://www.elibrary.ru/author_profile.asp?id=1111",
+            "orcid_src": "https://orcid.org/0000-0002-2222-2222",
+            "researcherid_src": "https://www.researchgate.net/profile/Name-Surname",
+            "scopus_src": "https://www.scopus.com/authid/detail.uri?authorId=4444",
+            "scienceid_src": "https://www.scopus.com/authid/detail.uri?authorId=5555"
+
         },
         {
             "id": 2,
@@ -46,7 +60,20 @@
                     "id": 5,
                     "name": "Блокчейн"
                 }
-            ]
+            ],
+            "email": "name@mail.ru",
+            "tg": "@tg_name",
+            "spinid": 1111,
+            "orcid": 2222,
+            "researcherid": 3333,
+            "scopus": 4444,
+            "scienceid": 5555,
+            "tg_src": "https://t.me/tg_name",
+            "spinid_src": "https://www.elibrary.ru/author_profile.asp?id=1111",
+            "orcid_src": "https://orcid.org/0000-0002-2222-2222",
+            "researcherid_src": "https://www.researchgate.net/profile/Name-Surname",
+            "scopus_src": "https://www.scopus.com/authid/detail.uri?authorId=4444",
+            "scienceid_src": "https://www.scopus.com/authid/detail.uri?authorId=5555"
         },
         {
             "id": 3,
@@ -64,7 +91,20 @@
                     "id": 5,
                     "name": "Блокчейн"
                 }
-            ]
+            ],
+            "email": "name@mail.ru",
+            "tg": "@tg_name",
+            "spinid": 1111,
+            "orcid": 2222,
+            "researcherid": 3333,
+            "scopus": 4444,
+            "scienceid": 5555,
+            "tg_src": "https://t.me/tg_name",
+            "spinid_src": "https://www.elibrary.ru/author_profile.asp?id=1111",
+            "orcid_src": "https://orcid.org/0000-0002-2222-2222",
+            "researcherid_src": "https://www.researchgate.net/profile/Name-Surname",
+            "scopus_src": "https://www.scopus.com/authid/detail.uri?authorId=4444",
+            "scienceid_src": "https://www.scopus.com/authid/detail.uri?authorId=5555"
         },
         {
             "id": 4,
@@ -82,7 +122,20 @@
                     "id": 5,
                     "name": "Блокчейн"
                 }
-            ]
+            ],
+            "email": "name@mail.ru",
+            "tg": "@tg_name",
+            "spinid": 1111,
+            "orcid": 2222,
+            "researcherid": 3333,
+            "scopus": 4444,
+            "scienceid": 5555,
+            "tg_src": "https://t.me/tg_name",
+            "spinid_src": "https://www.elibrary.ru/author_profile.asp?id=1111",
+            "orcid_src": "https://orcid.org/0000-0002-2222-2222",
+            "researcherid_src": "https://www.researchgate.net/profile/Name-Surname",
+            "scopus_src": "https://www.scopus.com/authid/detail.uri?authorId=4444",
+            "scienceid_src": "https://www.scopus.com/authid/detail.uri?authorId=5555"
         },
         {
             "id": 5,
@@ -100,7 +153,20 @@
                     "id": 5,
                     "name": "Блокчейн"
                 }
-            ]
+            ],
+            "email": "name@mail.ru",
+            "tg": "@tg_name",
+            "spinid": 1111,
+            "orcid": 2222,
+            "researcherid": 3333,
+            "scopus": 4444,
+            "scienceid": 5555,
+            "tg_src": "https://t.me/tg_name",
+            "spinid_src": "https://www.elibrary.ru/author_profile.asp?id=1111",
+            "orcid_src": "https://orcid.org/0000-0002-2222-2222",
+            "researcherid_src": "https://www.researchgate.net/profile/Name-Surname",
+            "scopus_src": "https://www.scopus.com/authid/detail.uri?authorId=4444",
+            "scienceid_src": "https://www.scopus.com/authid/detail.uri?authorId=5555"
         }
         ,
         {
@@ -119,7 +185,20 @@
                     "id": 5,
                     "name": "Блокчейн"
                 }
-            ]
+            ],
+            "email": "name@mail.ru",
+            "tg": "@tg_name",
+            "spinid": 1111,
+            "orcid": 2222,
+            "researcherid": 3333,
+            "scopus": 4444,
+            "scienceid": 5555,
+            "tg_src": "https://t.me/tg_name",
+            "spinid_src": "https://www.elibrary.ru/author_profile.asp?id=1111",
+            "orcid_src": "https://orcid.org/0000-0002-2222-2222",
+            "researcherid_src": "https://www.researchgate.net/profile/Name-Surname",
+            "scopus_src": "https://www.scopus.com/authid/detail.uri?authorId=4444",
+            "scienceid_src": "https://www.scopus.com/authid/detail.uri?authorId=5555"
         },
         {
             "id": 7,
@@ -137,7 +216,20 @@
                     "id": 5,
                     "name": "Блокчейн"
                 }
-            ]
+            ],
+            "email": "name@mail.ru",
+            "tg": "@tg_name",
+            "spinid": 1111,
+            "orcid": 2222,
+            "researcherid": 3333,
+            "scopus": 4444,
+            "scienceid": 5555,
+            "tg_src": "https://t.me/tg_name",
+            "spinid_src": "https://www.elibrary.ru/author_profile.asp?id=1111",
+            "orcid_src": "https://orcid.org/0000-0002-2222-2222",
+            "researcherid_src": "https://www.researchgate.net/profile/Name-Surname",
+            "scopus_src": "https://www.scopus.com/authid/detail.uri?authorId=4444",
+            "scienceid_src": "https://www.scopus.com/authid/detail.uri?authorId=5555"
         },
         {
             "id": 8,
@@ -155,7 +247,20 @@
                     "id": 5,
                     "name": "Блокчейн"
                 }
-            ]
+            ],
+            "email": "name@mail.ru",
+            "tg": "@tg_name",
+            "spinid": 1111,
+            "orcid": 2222,
+            "researcherid": 3333,
+            "scopus": 4444,
+            "scienceid": 5555,
+            "tg_src": "https://t.me/tg_name",
+            "spinid_src": "https://www.elibrary.ru/author_profile.asp?id=1111",
+            "orcid_src": "https://orcid.org/0000-0002-2222-2222",
+            "researcherid_src": "https://www.researchgate.net/profile/Name-Surname",
+            "scopus_src": "https://www.scopus.com/authid/detail.uri?authorId=4444",
+            "scienceid_src": "https://www.scopus.com/authid/detail.uri?authorId=5555"
         }
     ]
 }

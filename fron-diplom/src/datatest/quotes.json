@@ -1,0 +1,59 @@
+{
+    "quotes": [
+        {
+            "id": 1,
+            "publication": {
+                "id": 1,
+                "publication_date": "10.02.2025",
+                "image": "https://habrastorage.org/getpro/habr/upload_files/5d0/a51/372/5d0a51372beee773c46a59fa559db496.png",
+                "title": "Что такое MEV в блокчейне",
+                "desc": "В большинстве блокчейнов транзакции, отправленные в mempool (пул неподтвержденных транзакций), упорядочиваются в блок перед добавлением в существующую цепочку блоков. Это делают валидаторы или майнеры."
+            },
+            "publication2": {
+                "id": 20,
+                "publication_date": "23.03.2025",
+                "image": "https://habrastorage.org/getpro/habr/upload_files/5d0/a51/372/5d0a51372beee773c46a59fa559db496.png",
+                "title": "Блокчейн",
+                "desc": "Описание"
+            },
+            "city": "Ульяновск"
+        },
+        {
+            "id": 2,
+            "publication": {
+                "id": 1,
+                "publication_date": "10.02.2025",
+                "image": "https://habrastorage.org/getpro/habr/upload_files/5d0/a51/372/5d0a51372beee773c46a59fa559db496.png",
+                "title": "Что такое MEV в блокчейне",
+                "desc": "В большинстве блокчейнов транзакции, отправленные в mempool (пул неподтвержденных транзакций), упорядочиваются в блок перед добавлением в существующую цепочку блоков. Это делают валидаторы или майнеры."
+            },
+            "publication2": {
+                "id": 20,
+                "publication_date": "23.03.2025",
+                "image": "https://habrastorage.org/getpro/habr/upload_files/5d0/a51/372/5d0a51372beee773c46a59fa559db496.png",
+                "title": "Блокчейн",
+                "desc": "Описание"
+            },
+            "city": "Самара"
+        },
+        {
+            "id": 3,
+            "publication": {
+                "id": 1,
+                "publication_date": "10.02.2025",
+                "image": "https://habrastorage.org/getpro/habr/upload_files/5d0/a51/372/5d0a51372beee773c46a59fa559db496.png",
+                "title": "Что такое MEV в блокчейне",
+                "desc": "В большинстве блокчейнов транзакции, отправленные в mempool (пул неподтвержденных транзакций), упорядочиваются в блок перед добавлением в существующую цепочку блоков. Это делают валидаторы или майнеры."
+            },
+            "publication2": {
+                "id": 20,
+                "publication_date": "23.03.2025",
+                "image": "https://habrastorage.org/getpro/habr/upload_files/5d0/a51/372/5d0a51372beee773c46a59fa559db496.png",
+                "title": "Блокчейн",
+                "desc": "Описание"
+            },
+            "city": "Самара"
+        }
+        
+    ]
+}
