@@ -4,6 +4,7 @@ import AuthorHomepage from "../components/author_homepage";
 import AuthorPublications from "../components/author_publications";
 import authorsData from "../datatest/authors.json";
 import { useParams } from "react-router-dom";
+import { Word } from "../components/word_cloud";
 
 interface Author {
   id: number;
@@ -13,17 +14,28 @@ interface Author {
   desc_author: string;
   email?: string;
   tg?: string;
-  spinid?: number;
-  orcid?: number;
-  resercherid?: number;
-  scopusid?: number;
-  scienceid?: number;
+  spinid?: string;
+  orcid?: string;
+  resercherid?: string;
+  scopusid?: string;
+  scienceid?: string;
   tg_src?: string;
   spinid_src?: string;
   orcid_src?: string;
   resercherid_src?: string;
   scopusid_src?: string;
   scienceid_src?: string;
+  collab_name: string;
+  collab_id: number;
+  categories: {
+    id: number;
+    name: string;
+  }[];
+  num_public: number;
+  years_public_one: string;
+  years_public_two: string;
+  words: Word[];
+  words2: Word[];
 }
 
 const AuthorPage = () => {
@@ -71,14 +83,15 @@ const AuthorPage = () => {
 
       {isHomepageOpen ? (
         <AuthorHomepage
-          collab_name="Ильдар З. Батыршин"
-          popular_topic="Анализ настроений"
+          id={author.id} 
+          collab_name={author.collab_name}
+          popular_topic={author.categories[0]?.name ?? ""}
           popular_word="Агенты"
           avr_cit="2"
           num_cit="92"
-          num_public="37"
-          years_public_one="1998"
-          years_public_two="2024"
+          num_public={author.num_public}
+          years_public_one={author.years_public_one}
+          years_public_two={author.years_public_two}
           email={author.email}
           tg={author.tg}
           spinid={author.spinid}
@@ -92,6 +105,10 @@ const AuthorPage = () => {
           resercherid_src={author.resercherid_src}
           scopusid_src={author.scopusid_src}
           scienceid_src={author.scienceid_src}
+          collab_id = {author.collab_id}
+          words={author.words}
+          words2={author.words2}
+          setIsHomepageOpen={setIsHomepageOpen}
         />
       ) : (
         <AuthorPublications authorId={Number(id)} />

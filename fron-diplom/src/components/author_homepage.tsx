@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import {
   BarChart,
@@ -15,34 +16,43 @@ import WordCloud from "./word_cloud";
 import { Word } from "./word_cloud";
 import MapChart from "./MapChart";
 import quotesData from '../datatest/quotes.json';
+import { Publication } from "./author_publications.tsx";
+import publicationsData from "../datatest/publications.json";
+import dayjs, { Dayjs } from "dayjs";
 
 const quotes = quotesData.quotes;
 
 type AuthorHomepageProps = {
+  id: number;
   collab_name?: string;
   popular_topic?: string;
   popular_word?: string;
   avr_cit?: string;
   num_cit?: string;
-  num_public?: string;
+  num_public?: number;
   years_public_one?: string;
   years_public_two?: string;
   email?: string;
   tg?: string;
-  spinid?: number;
-  orcid?: number;
-  resercherid?: number;
-  scopusid?: number;
-  scienceid?: number;
+  spinid?: string;
+  orcid?: string;
+  resercherid?: string;
+  scopusid?: string;
+  scienceid?: string;
   tg_src?: string;
   spinid_src?: string;
   orcid_src?: string;
   resercherid_src?: string;
   scopusid_src?: string;
   scienceid_src?: string;
+  collab_id: number;
+  words: Word[];
+  words2: Word[];
+  setIsHomepageOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const AuthorHomepage = ({
+  id,
   collab_name,
   popular_topic,
   popular_word,
@@ -63,91 +73,81 @@ const AuthorHomepage = ({
   orcid_src,
   resercherid_src,
   scopusid_src,
-  scienceid_src
+  scienceid_src,
+  collab_id,
+  words,
+  words2,
+  setIsHomepageOpen
 }: AuthorHomepageProps) => {
-  const words: Word[] = [
-    { text: "Машинное обучение", value: 50 },
-    { text: "Кибербезопасность", value: 40 },
-    { text: "Веб-разработка", value: 35 },
-    { text: "Бэкенд-разработка", value: 30 },
-    { text: "Мобильная разработка", value: 25 },
-    { text: "Облачные технологии", value: 20 },
-    { text: "Разработка игр", value: 25 },
-    { text: "Блокчейн", value: 20 },
-    { text: "Интернет вещей", value: 20 },
-    { text: "Анализ данных", value: 20 },
-  ];
+
+  const [allPublications, setAllPublications] = useState<Publication[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (
+          !publicationsData ||
+          !publicationsData.publications ||
+          publicationsData.publications.length === 0
+        ) {
+          console.warn("Публикации пусты или не загружены");
+          return;
+        }
+
+        const filteredPublications = await new Promise<Publication[]>(
+          (resolve) => {
+            const filtered = publicationsData.publications.filter(
+              (publication: Publication) =>
+                publication.authors.some((author) => author.id === id)
+            );
+            resolve(filtered);
+          }
+        );
+
+        const sortedPublications = await new Promise<Publication[]>(
+          (resolve) => {
+            const sorted = [...filteredPublications].sort((a, b) => {
+              const dateA = dayjs(a.publication_date, "DD.MM.YYYY");
+              const dateB = dayjs(b.publication_date, "DD.MM.YYYY");
+
+              if (dateA.isBefore(dateB)) {
+                return 1;
+              } else if (dateA.isAfter(dateB)) {
+                return -1;
+              } else {
+                return 0;
+              }
+            });
+            resolve(sorted);
+          }
+        );
+        const type5publish = sortedPublications.slice(0, 5);
+
+        setAllPublications(type5publish);
+      } catch (error) {
+        console.error("Ошибка при загрузке публикаций:", error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const data = [
-    { year: 2015, count: 30 },
-    { year: 2016, count: 45 },
-    { year: 2017, count: 60 },
-    { year: 2018, count: 50 },
-    { year: 2019, count: 70 },
-    { year: 2020, count: 30 },
-    { year: 2021, count: 45 },
-    { year: 2022, count: 60 },
-    { year: 2023, count: 50 },
-    { year: 2024, count: 70 },
-  ];
-
-  const words2: Word[] = [
-    { text: "Алгоритмы", value: 50 },
-    { text: "Машинное обучение", value: 40 },
-    { text: "Веб-разработка", value: 35 },
-    { text: "Бэкенд-разработка", value: 30 },
-    { text: "Фронтенд-разработка", value: 25 },
-    { text: "Облачные технологии", value: 20 },
-    { text: "Разработка игр", value: 25 },
-    { text: "Блокчейн", value: 20 },
-    { text: "Интернет вещей", value: 20 },
-    { text: "Анализ данных", value: 20 },
-  ];
-
-  const cards = [
-    {
-      image: "https://modenov.ru/blog/pictures/recursosprogramadores.png.jpg",
-      title: "Карточка 1",
-      description: "Описание карточки 1",
-      data: "10 сентября 2024",
-    },
-    {
-      image: "https://modenov.ru/blog/pictures/recursosprogramadores.png.jpg",
-      title: "Карточка 2",
-      description: "Описание карточки 2",
-      data: "10 сентября 2024",
-    },
-    {
-      image: "https://modenov.ru/blog/pictures/recursosprogramadores.png.jpg",
-      title: "Карточка 3",
-      description: "Описание карточки 3",
-      data: "10 сентября 2024",
-    },
-    {
-      image: "https://modenov.ru/blog/pictures/recursosprogramadores.png.jpg",
-      title: "Карточка 4",
-      description: "Описание карточки 4",
-      data: "10 сентября 2024",
-    },
-    {
-      image: "https://modenov.ru/blog/pictures/recursosprogramadores.png.jpg",
-      title: "Карточка 5",
-      description: "Описание карточки 5",
-      data: "10 сентября 2024",
-    },
-    {
-      image: "https://modenov.ru/blog/pictures/recursosprogramadores.png.jpg",
-      title: "Карточка 6",
-      description: "Описание карточки 6",
-      data: "10 сентября 2024",
-    },
+    { year: 2018, count: 9 },
+    { year: 2019, count: 8 },
+    { year: 2020, count: 12 },
+    { year: 2021, count: 10 },
+    { year: 2022, count: 14 },
+    { year: 2023, count: 11 },
+    { year: 2024, count: 6},
+    { year: 2025, count: 6},
   ];
 
   return (
     <div className="page">
       <div className="page_container">
         <div className="author_info1">
-          <div className="info1_rect">
+          <div className="info1_rect" onClick={() => (window.location.href = `/author/${collab_id}`)}>
             <div className="info1_title">Наиболее частый соавтор</div>
             <div
               style={{
@@ -159,7 +159,7 @@ const AuthorHomepage = ({
             >
               <div>
                 <div className="info1_subtitle">{collab_name}</div>
-                <div className="info1_subtitle_dop">род деятельности</div>
+                <div className="info1_subtitle_dop"></div>
               </div>
               <MdOutlineArrowForwardIos
                 size={"30px"}
@@ -306,14 +306,14 @@ const AuthorHomepage = ({
             },
           }}
         >
-          {cards.map((card, index) => (
-            <SwiperSlide key={index}>
+          {allPublications.map((card) => (
+            <SwiperSlide key={card.id}>
               <div className="card">
                 <img src={card.image} alt={card.title} />
                 <div className="desc">
                   <div className="title">{card.title}</div>
-                  <div className="desc_pub">{card.description}</div>
-                  <div className="data">{card.data}</div>
+                  <div className="desc_pub">{card.desc}</div>
+                  <div className="data">{card.publication_date}</div>
                 </div>
               </div>
             </SwiperSlide>
@@ -324,7 +324,7 @@ const AuthorHomepage = ({
         <div
           style={{ width: "100%", display: "flex", justifyContent: "center" }}
         >
-          <button className="learn-more">
+          <button className="learn-more" onClick={() => setIsHomepageOpen(false)}>
             <span className="circle" aria-hidden="true">
               <span className="icon arrow"></span>
             </span>

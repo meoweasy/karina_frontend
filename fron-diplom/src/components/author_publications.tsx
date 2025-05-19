@@ -27,7 +27,7 @@ interface Author {
   image_author: string;
 }
 
-interface Publication {
+export interface Publication {
   id: number;
   image: string;
   title: string;
