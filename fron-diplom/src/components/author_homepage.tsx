@@ -73,11 +73,7 @@ const AuthorHomepage = ({
   orcid_src,
   resercherid_src,
   scopusid_src,
-  scienceid_src,
-  collab_id,
-  words,
-  words2,
-  setIsHomepageOpen
+  scienceid_src
 }: AuthorHomepageProps) => {
 
   const [allPublications, setAllPublications] = useState<Publication[]>([]);
