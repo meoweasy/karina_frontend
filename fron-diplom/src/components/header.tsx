@@ -1,5 +1,5 @@
 import { useState } from "react";
-import logoimage from "../assets/main/LOGO.svg";
+import logoimage from "../assets/main/logo2.png";
 import "../styles/header.scss";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -17,7 +17,7 @@ const Header = () => {
         <div className="header_container">
           <div className="header_logo">
             <Link to="/">
-              <img src={logoimage} alt="logo" />
+              <img src={logoimage} alt="logo" width={"75px"}/>
             </Link>
           </div>
           <div className="header_nav_container">
@@ -37,7 +37,7 @@ const Header = () => {
             </Link>
             <Link
               className="nav_item"
-              to="/articles"
+              to="/list_publications"
               onClick={() => setIsNavOpen(false)}
             >
               Статьи
@@ -110,7 +110,7 @@ const Header = () => {
           </div>
 
           <button className="modal_btn">вход</button>
-          <div className="modal_subtitle">Еще нет аккаунта? <button>Зарегистрироваться</button></div>
+          {/* <div className="modal_subtitle">Еще нет аккаунта? <button>Зарегистрироваться</button></div> */}
         </div>
       </div>
     </>

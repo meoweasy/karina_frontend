@@ -81,12 +81,12 @@ const MapChart: React.FC<MapChartProps> = ({ quotes }) => {
             center: [100.3282, 66.3866],
             itemStyle: {
               areaColor: "#d1e4f2",
-              borderColor: "#aaa",
+              borderColor: "#0267cc",
               borderWidth: 0.5,
             },
             emphasis: {
               itemStyle: {
-                areaColor: "#a5c8f4",
+                areaColor: "#0267cc",
               },
             },
           },

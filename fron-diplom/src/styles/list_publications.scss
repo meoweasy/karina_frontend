@@ -1,0 +1,91 @@
+@use "main" as vars;
+
+.card_publish{
+    width: 100%;
+    height: 150px;
+    background-color: vars.$color_grey_light;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    position: relative;
+    font-family: "Montserrat", serif;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.card_publish .img_publish{
+    width: 60px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.card_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.61);
+  z-index: 1;
+  border-radius: 10px 0px 0px 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  color: white;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.card_overlay div{
+    width: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card_content_publish{
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    border-radius: 0px 10px 10px 0px;
+    flex-direction: column;
+}
+
+.card_content_publish .item_card:first-child{
+    color: vars.$color_black;
+    font-weight: 500;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+}
+
+.card_content_publish .item_card:nth-child(2){
+    color: vars.$color_black;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+}
+
+.card_publish .categ_cont{
+    color: vars.$color_black_light2;
+    font-weight: 400;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.card_publish .categ_cont div{
+    margin-left: 5px;
+}
+
+.authors_cont2{
+    display: flex;
+    flex-direction: row;
+}

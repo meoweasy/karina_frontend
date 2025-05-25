@@ -15,10 +15,11 @@ import { Navigation, Pagination } from "swiper/modules";
 import WordCloud from "./word_cloud";
 import { Word } from "./word_cloud";
 import MapChart from "./MapChart";
-import quotesData from '../datatest/quotes.json';
+import quotesData from "../datatest/quotes.json";
 import { Publication } from "./author_publications.tsx";
 import publicationsData from "../datatest/publications.json";
 import dayjs, { Dayjs } from "dayjs";
+import { Link } from "react-router-dom";
 
 const quotes = quotesData.quotes;
 
@@ -73,9 +74,12 @@ const AuthorHomepage = ({
   orcid_src,
   resercherid_src,
   scopusid_src,
-  scienceid_src
+  scienceid_src,
+  collab_id,
+  words,
+  words2,
+  setIsHomepageOpen,
 }: AuthorHomepageProps) => {
-
   const [allPublications, setAllPublications] = useState<Publication[]>([]);
 
   useEffect(() => {
@@ -135,15 +139,33 @@ const AuthorHomepage = ({
     { year: 2021, count: 10 },
     { year: 2022, count: 14 },
     { year: 2023, count: 11 },
-    { year: 2024, count: 6},
-    { year: 2025, count: 6},
+    { year: 2024, count: 6 },
+    { year: 2025, count: 6 },
+  ];
+
+  const data2 = [
+    { month: "Январь", count: 9 },
+    { month: "Февраль", count: 8 },
+    { month: "Март", count: 12 },
+    { month: "Апрель", count: 10 },
+    { month: "Май", count: 14 },
+    { month: "Июнь", count: 11 },
+    { month: "Июль", count: 6 },
+    { month: "Август", count: 0 },
+    { month: "Сентябрь", count: 6 },
+    { month: "Октябрь", count: 6 },
+    { month: "Ноябрь", count: 6 },
+    { month: "Декабрь", count: 6 },
   ];
 
   return (
     <div className="page">
       <div className="page_container">
         <div className="author_info1">
-          <div className="info1_rect" onClick={() => (window.location.href = `/author/${collab_id}`)}>
+          <div
+            className="info1_rect"
+            onClick={() => (window.location.href = `/author/${collab_id}`)}
+          >
             <div className="info1_title">Наиболее частый соавтор</div>
             <div
               style={{
@@ -243,29 +265,52 @@ const AuthorHomepage = ({
               <Tooltip />
               <Bar
                 dataKey="count"
-                fill="#8884d8"
+                fill="#004890"
                 name="Количество публикаций"
               />
             </BarChart>
           </ResponsiveContainer>
         </div>
 
-        <div className="diagramm_cont var3">
+        <div className="diagramm_cont var2" style={{ marginTop: "50px" }}>
+          <div className="diagramm_cont_title">
+            <div className="rect_title"></div>
+            <div className="text">Количество цитирований за текущий год</div>
+          </div>
+          <ResponsiveContainer width="100%" height={600}>
+            <BarChart data={data2}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Bar
+                dataKey="count"
+                fill="#004890"
+                name="Количество цитирований"
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="diagramm_cont var1" style={{ marginTop: "50px" }}>
           <div className="diagramm_cont_title">
             <div className="rect_title"></div>
             <div className="text">Ключевые слова</div>
           </div>
           <div style={{ width: "100%", height: "100%" }}>
-            <WordCloud words={words2}/>
+            <WordCloud words={words2} />
           </div>
         </div>
-      </div>
 
-      <div
-        className="page_container slider_author"
-        style={{ marginTop: "100px" }}
-      >
-        <MapChart quotes={quotes} />
+        <div className="diagramm_cont var3" style={{ height: "550px" }}>
+          <div className="diagramm_cont_title">
+            <div className="rect_title"></div>
+            <div className="text">Карта цитирований</div>
+          </div>
+          <div style={{ width: "100%", height: "100%" }}>
+            <MapChart quotes={quotes} />
+          </div>
+        </div>
       </div>
 
       <div
@@ -304,14 +349,20 @@ const AuthorHomepage = ({
         >
           {allPublications.map((card) => (
             <SwiperSlide key={card.id}>
-              <div className="card">
-                <img src={card.image} alt={card.title} />
-                <div className="desc">
-                  <div className="title">{card.title}</div>
-                  <div className="desc_pub">{card.desc}</div>
-                  <div className="data">{card.publication_date}</div>
+              <Link
+                to={`/publication/${card.id}`}
+                style={{ textDecoration: "none" }}
+                color="black"
+              >
+                <div className="card">
+                  <img src={card.image} alt={card.title} />
+                  <div className="desc">
+                    <div className="title">{card.title}</div>
+                    <div className="desc_pub">{card.desc}</div>
+                    <div className="data">{card.publication_date}</div>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -320,7 +371,10 @@ const AuthorHomepage = ({
         <div
           style={{ width: "100%", display: "flex", justifyContent: "center" }}
         >
-          <button className="learn-more" onClick={() => setIsHomepageOpen(false)}>
+          <button
+            className="learn-more"
+            onClick={() => setIsHomepageOpen(false)}
+          >
             <span className="circle" aria-hidden="true">
               <span className="icon arrow"></span>
             </span>
@@ -376,31 +430,45 @@ const AuthorHomepage = ({
           </div>
           <div className="contact_item">
             <div className="contact_text">Телеграм:</div>
-            <a className="contact_href" href={tg_src} target="_blank">{tg}</a>
+            <a className="contact_href" href={tg_src} target="_blank">
+              {tg}
+            </a>
           </div>
           <div className="contact_item">
             <div className="contact_text">SPIN-код РИНЦ:</div>
-            <a className="contact_href" href={spinid_src} target="_blank">{spinid}</a>
+            <a className="contact_href" href={spinid_src} target="_blank">
+              {spinid}
+            </a>
           </div>
           <div className="contact_item">
             <div className="contact_text">ORCID:</div>
-            <a className="contact_href" href={orcid_src} target="_blank">{orcid}</a>
+            <a className="contact_href" href={orcid_src} target="_blank">
+              {orcid}
+            </a>
           </div>
           <div className="contact_item">
             <div className="contact_text">ResearcherID:</div>
-            <a className="contact_href" href={resercherid_src} target="_blank">{resercherid}</a>
+            <a className="contact_href" href={resercherid_src} target="_blank">
+              {resercherid}
+            </a>
           </div>
           <div className="contact_item">
             <div className="contact_text">Scopus AuthorID:</div>
-            <a className="contact_href" href={scopusid_src} target="_blank">{scopusid}</a>
+            <a className="contact_href" href={scopusid_src} target="_blank">
+              {scopusid}
+            </a>
           </div>
           <div className="contact_item">
             <div className="contact_text">Science ID:</div>
-            <a className="contact_href" href={scienceid_src} target="_blank">{scienceid}</a>
+            <a className="contact_href" href={scienceid_src} target="_blank">
+              {scienceid}
+            </a>
           </div>
           <div className="contact_item">
             <div className="contact_text">ResearchGate:</div>
-            <a className="contact_href" href={resercherid_src} target="_blank">{resercherid}</a>
+            <a className="contact_href" href={resercherid_src} target="_blank">
+              {resercherid}
+            </a>
           </div>
         </div>
       </div>

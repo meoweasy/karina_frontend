@@ -1,29 +1,8 @@
 import { useEffect, useState } from "react";
-import "../styles/list_authors.scss";
+import publicationsData from "../datatest/publications.json";
 import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
-import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
-import authorsData from "../datatest/authors.json";
-import { Link } from "react-router-dom";
-
-const ITEMS_PER_PAGE = 6;
-
-function valuetext(value: number) {
-  return `${value}°C`;
-}
-
-const marks = [
-  {
-    value: 0,
-    label: "0",
-  },
-  {
-    value: 100,
-    label: "100",
-  },
-];
-
-const minDistance = 10;
+import { Link, useSearchParams } from "react-router-dom";
+import "../styles/list_publications.scss";
 
 interface Categories {
   id: number;
@@ -35,61 +14,55 @@ interface Author {
   fio_author: string;
   desc_author: string;
   image_author: string;
-  num_public: number;
-  categories: Categories[];
 }
 
-const ListAuthor = () => {
+interface Publication {
+  id: number;
+  image: string;
+  title: string;
+  desc: string;
+  authors: Author[];
+  publication_date: string;
+  categories: Categories[];
+  text: string[];
+}
+
+const ITEMS_PER_PAGE = 6;
+
+const ListPublications = () => {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
   const [keyword, setKeyword] = useState("");
-  const [authors, setAuthors] = useState<Author[]>([]);
-  const [allAuthors, setAllAuthors] = useState<Author[]>([]);
+  const [publications, setPublications] = useState<Publication[]>([]);
+  const [allPublications, setAllPublications] = useState<Publication[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         if (
-          !authorsData ||
-          !authorsData.authors ||
-          authorsData.authors.length === 0
+          !publicationsData ||
+          !publicationsData.publications ||
+          publicationsData.publications.length === 0
         ) {
           return;
         }
-        console.log(authorsData.authors);
-        setAuthors(authorsData.authors);
-        setAllAuthors(authorsData.authors);
+        setPublications(publicationsData.publications);
+        setAllPublications(publicationsData.publications);
       } catch (error) {
-        console.error("Ошибка при загрузке авторов:", error);
+        console.error("Ошибка при загрузке публикаций:", error);
       }
     };
 
     fetchData();
   }, []);
 
-  const [numPublic, setNumPublic] = useState<number[]>([0, 100]);
-
-  const handleChangeNumPublic = (
-    _event: Event,
-    newValue: number | number[],
-    activeThumb: number
-  ) => {
-    if (!Array.isArray(newValue)) {
-      return;
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q) {
+      onChange(q);
     }
-
-    if (activeThumb === 0) {
-      setNumPublic([
-        Math.min(newValue[0], numPublic[1] - minDistance),
-        numPublic[1],
-      ]);
-    } else {
-      setNumPublic([
-        numPublic[0],
-        Math.max(newValue[1], numPublic[0] + minDistance),
-      ]);
-    }
-  };
+  }, [searchParams, allPublications]);
 
   const categories = [
     { id: 1, name: "Категория 1" },
@@ -108,60 +81,86 @@ const ListAuthor = () => {
   };
 
   useEffect(() => {
-    if (allAuthors.length > 0) {
-      filterAuthors();
+    if (allPublications.length > 0) {
+      filterPublications();
     }
-  }, [selectedCategories, numPublic]);
+  }, [selectedCategories]);
 
-  const filterAuthors = () => {
-    let filteredAuthors = allAuthors;
+  const filterPublications = () => {
+    let filteredPublications = allPublications;
 
     // Фильтрация по категориям
     if (selectedCategories.length > 0) {
-      filteredAuthors = filteredAuthors.filter((publish) => {
+      filteredPublications = filteredPublications.filter((publish) => {
         return publish.categories.some((category) =>
           selectedCategories.includes(category.id)
         );
       });
     }
 
-    // Фильтрация по кол-ву публикаций
-    filteredAuthors = filteredAuthors.filter((publish) => {
-      return (
-        publish.num_public >= numPublic[0] && publish.num_public <= numPublic[1]
-      );
-    });
-
     setCurrentPage(1);
-    setAuthors(filteredAuthors);
+    setPublications(filteredPublications);
   };
 
   // поиск
+  const stripHTML = (html: string) => html.replace(/<[^>]*>/g, "");
+
   const onChange = (keyword_props: string) => {
-    const filtered = allAuthors.filter((author) => {
-      return `${author.fio_author.toLowerCase()} ${author.desc_author.toLowerCase()}`.includes(
-        keyword_props.toLowerCase()
+    const keyword = keyword_props.toLowerCase();
+
+    const filtered = allPublications.filter((publish) => {
+      const title = publish.title?.toLowerCase() || "";
+      const desc = publish.desc?.toLowerCase() || "";
+
+      const text = Array.isArray(publish.text)
+        ? stripHTML(publish.text.join(" ")).toLowerCase()
+        : "";
+
+      return (
+        title.includes(keyword) ||
+        desc.includes(keyword) ||
+        text.includes(keyword)
       );
     });
+
     setCurrentPage(1);
     setKeyword(keyword_props);
-    setAuthors(filtered);
+    setPublications(filtered);
   };
 
   // пагинация
   const getCurrentPageData = () => {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
     const endIndex = startIndex + ITEMS_PER_PAGE;
-    return authors.slice(startIndex, endIndex);
+    return publications.slice(startIndex, endIndex);
   };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  const displayedAuthors = getCurrentPageData();
+  const displayedPublications = getCurrentPageData();
 
-  const totalPages = Math.ceil(authors.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(publications.length / ITEMS_PER_PAGE);
+
+  function formatDate(dateStr: string) {
+    const [day, month, year] = dateStr.split(".");
+    const months = [
+      "янв",
+      "февр",
+      "марта",
+      "апр",
+      "мая",
+      "июня",
+      "июля",
+      "авг",
+      "сен",
+      "окт",
+      "нояб",
+      "дек",
+    ];
+    return `${parseInt(day)} ${months[parseInt(month) - 1]} ${year}`;
+  }
 
   return (
     <div className="page">
@@ -207,60 +206,53 @@ const ListAuthor = () => {
               ))}
             </FormGroup>
           </div>
-
-          <div className="item_filter">
-            <div className="diagramm_cont_title">
-              <div className="rect_title"></div>
-              <div className="text">Количество публикаций</div>
-            </div>
-            <Box>
-              <Slider
-                getAriaLabel={() => "Minimum distance"}
-                value={numPublic}
-                onChange={handleChangeNumPublic}
-                valueLabelDisplay="auto"
-                getAriaValueText={valuetext}
-                disableSwap
-                step={1}
-                marks={marks}
-                min={0}
-                max={100}
-                size="small"
-                sx={{
-                  color: "#262626",
-                  "& .MuiSlider-thumb": {
-                    backgroundColor: "#262626",
-                  },
-                  "& .MuiSlider-rail": {
-                    backgroundColor: "#e0e0e0",
-                  },
-                }}
-              />
-            </Box>
-          </div>
         </div>
 
         <div className="cards_container">
-          <div className="cards_authors_container">
-            {displayedAuthors.map((author) => (
+          <div
+            className="cards_authors_container"
+            style={{ flexDirection: "column", justifyContent: "flex-start" }}
+          >
+            {displayedPublications.map((publish) => (
               <Link
-                to={`/author/${author.id}`}
+                to={`/publication/${publish.id}`}
                 style={{ textDecoration: "none" }}
                 color="black"
               >
-                <div key={author.id} className="card_author">
-                  <img src={author.image_author} alt=""></img>
-                  <div className="card_content">
-                    <div className="item_card">{author.fio_author}</div>
-                    <div className="item_card">{author.desc_author}</div>
-                    <div className="item_card">
-                      Количество публикаций: {author.num_public}
-                    </div>
+                <div key={publish.id} className="card_publish">
+                  <img className="img_publish" src={publish.image} alt=""></img>
+                  <div className="card_overlay">
+                    <div>{formatDate(publish.publication_date)}</div>
+                  </div>
+                  <div className="card_content_publish">
+                    <div className="item_card">{publish.title}</div>
+                    <div className="item_card">{publish.desc}</div>
                     <div className="categ_cont">
-                      {author.categories.map((category) => (
+                      {publish.categories.map((category) => (
                         <div key={category.id} className="categ_name">
-                          {category.name}
+                          «{category.name}»
                         </div>
+                      ))}
+                    </div>
+                    <div className="authors_cont2">
+                      {publish.authors.map((author, index_author) => (
+                        <Link
+                          to={`/author/${author.id}`}
+                          style={{ textDecoration: "none" }}
+                          color="black"
+                        >
+                          <div key={index_author} className="card_author_cont">
+                            <div className="image_author">
+                              <img
+                                src={author.image_author}
+                                alt={author.fio_author}
+                              />
+                            </div>
+                            <div className="fio_author">
+                              {author.fio_author}
+                            </div>
+                          </div>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -298,4 +290,4 @@ const ListAuthor = () => {
   );
 };
 
-export default ListAuthor;
+export default ListPublications;

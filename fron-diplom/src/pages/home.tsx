@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import banner_image from "../assets/main/home_fon.svg";
-import logoimage from "../assets/main/LOGO.svg";
+import logoimage from "../assets/main/logo2.png";
 import "../styles/home.scss";
 import kbot from "../assets/main/kbot.svg";
 import ktop from "../assets/main//ktop.svg";
 import publicationsData from "../datatest/publications.json";
 import authorsData from "../datatest/authors.json";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Author {
   id: number;
@@ -25,7 +25,6 @@ interface Publication {
 }
 
 const HomePage = () => {
-  const [keyword, setKeyword] = useState("");
   const [popPublications, setPopPublications] = useState<Publication[]>([]);
   const [popAuthors, setPopAuthors] = useState<Author[]>([]);
 
@@ -34,12 +33,21 @@ const HomePage = () => {
     setPopAuthors(authorsData.authors.slice(0, 3));
   }, []);
 
+  const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
+
+  const handleKeyDown = (e: { key: string; }) => {
+    if (e.key === "Enter" && keyword.trim()) {
+      navigate(`/list_publications?q=${encodeURIComponent(keyword.trim())}`);
+    }
+  };
+
   return (
     <div className="page">
       <div className="main_banner_container">
         <img className="image_banner" src={banner_image} alt="" />
         <div className="content_banner">
-          <img src={logoimage} alt="logo" />
+          <img src={logoimage} alt="logo"/>
           <div className="text-block">
             Ваш путеводитель в мире знаний: работы и <br /> биографии
             преподавателей в удобном формате
@@ -49,7 +57,8 @@ const HomePage = () => {
             key="search-bar"
             value={keyword}
             placeholder={"Поиск по статьям ..."}
-            // onChange={(e) => onChange(e.target.value)}
+            onChange={(e) => setKeyword(e.target.value)}
+            onKeyDown={handleKeyDown}
           />
         </div>
         <div className="arrows"></div>
@@ -104,7 +113,7 @@ const HomePage = () => {
             marginTop: "30px",
           }}
         >
-          <button className="learn-more">
+          <button className="learn-more" onClick={() => (window.location.href = "/list_publications")}>
             <span className="circle" aria-hidden="true">
               <span className="icon arrow"></span>
             </span>
