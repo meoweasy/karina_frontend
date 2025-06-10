@@ -23,9 +23,13 @@ interface GeoJSON {
 
 echarts.use([GeoComponent, CanvasRenderer, ScatterChart]);
 
-interface Quote {
-  id: number;
-  city: string;
+interface Quote{
+  year: string;
+  href_publication: string;
+  name_publication: string;
+  href_quote: string;
+  name_quote: string
+  city_quote: string;
 }
 
 interface MapChartProps {
@@ -51,8 +55,8 @@ const MapChart: React.FC<MapChartProps> = ({ quotes }) => {
         // Группируем цитаты по городам
         const groupedQuotes = quotes.reduce<Record<string, number>>(
           (acc, quote) => {
-            if (quote.city in cityCoordinates) {
-              acc[quote.city] = (acc[quote.city] || 0) + 1;
+            if (quote.city_quote in cityCoordinates) {
+              acc[quote.city_quote] = (acc[quote.city_quote] || 0) + 1;
             }
             return acc;
           },
@@ -63,7 +67,7 @@ const MapChart: React.FC<MapChartProps> = ({ quotes }) => {
         const quoteSeries = Object.entries(groupedQuotes).map(
           ([city, count]) => ({
             name: city,
-            value: [...cityCoordinates[city]].reverse(), // [lon, lat] — перевернуты для правильной гео-позиции
+            value: [...cityCoordinates[city]].reverse(), 
             count,
           })
         );

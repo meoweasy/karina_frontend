@@ -88,14 +88,12 @@ const PublicationsEdit = () => {
       setBlocks([...blocks, imgTag]);
       setImageUrl("");
     } else if (mode === "quote" && quoteText.trim()) {
-      const articleRefs = selectedArticles
-        .map((a) => `<cite>${a.title}</cite>`)
-        .join(", ");
-      const quoteBlock = `<blockquote>${quoteText.trim()}${
-        articleRefs ? `<footer>${articleRefs}</footer>` : ""
-      }</blockquote>`;
+      const quoteBlock = selectedArticles
+        .map((a) => `[cite:${a.id}]`)
+        .join(" ");
+      const fullText = `<p>${quoteText.trim()} ${quoteBlock}</p>`;
 
-      setBlocks([...blocks, quoteBlock]);
+      setBlocks([...blocks, fullText]);
       setQuoteText("");
       setSelectedArticles([]);
     } else if (input.trim()) {
@@ -231,44 +229,24 @@ const PublicationsEdit = () => {
             )}
             disableCloseOnSelect
           />
-
-          <Box mt={2} display="flex" flexWrap="wrap" gap={1}>
-            {selectedCategories.map((cat) => (
-              <Chip
-                key={cat.id}
-                label={cat.name}
-                onDelete={() => handleDelete(cat.id)}
-                deleteIcon={<Cancel />}
-                color="primary"
-              />
-            ))}
-          </Box>
         </Box>
 
         <Box>
           <Autocomplete
             multiple
             options={allAuthors}
+            style={{ marginTop: 16 }}
             getOptionLabel={(option) => option.fio_author}
             value={selectedAuthors}
             onChange={(_e, newValue) => setSelectedAuthors(newValue)}
-            renderInput={(params) => (
-              <TextField {...params} label="Выберите авторов" />
-            )}
             disableCloseOnSelect
-          />
-
-          <Box mt={2} display="flex" flexWrap="wrap" gap={1}>
-            {selectedAuthors.map((author) => (
-              <Chip
-                key={author.id}
-                label={author.fio_author}
-                onDelete={() => handleDeleteAuthor(author.id)}
-                deleteIcon={<Cancel />}
-                color="primary"
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Выберите авторов"
               />
-            ))}
-          </Box>
+            )}
+          />
         </Box>
 
         <ToggleButtonGroup
@@ -315,11 +293,6 @@ const PublicationsEdit = () => {
             type="url"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
-            sx={
-              {
-                /* твои стили */
-              }
-            }
           />
         ) : mode === "quote" ? (
           <>
@@ -330,11 +303,6 @@ const PublicationsEdit = () => {
               label="Введите цитату"
               value={quoteText}
               onChange={(e) => setQuoteText(e.target.value)}
-              sx={
-                {
-                  /* стили */
-                }
-              }
             />
 
             <Autocomplete
@@ -373,11 +341,6 @@ const PublicationsEdit = () => {
             label="Введите текст"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            sx={
-              {
-                /* стили */
-              }
-            }
           />
         )}
 

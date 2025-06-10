@@ -57,9 +57,9 @@
 }
 
 .text_publication{
-    margin-top: 30px;
-    font-family: "Montserrat", serif;
-    line-height: 1.5;
+  margin-top: 30px;
+  font-family: "Montserrat", serif;
+  line-height: 1.5;
 }
 
 .category_list_cont{
@@ -79,4 +79,58 @@
   }
 }
 
-//адаптивность
+.custom-tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.citation-circle {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #555;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  line-height: 16px;
+  cursor: pointer;
+  margin: 0 4px;
+}
+
+.custom-tooltip {
+  visibility: hidden;
+  opacity: 0;
+  width: max-content;
+  max-width: 300px;
+  background-color: #222;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 10;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease-in-out;
+  font-size: 12px;
+  pointer-events: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.custom-tooltip-wrapper:hover .custom-tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+ol{
+  font-family: "Montserrat", serif;
+  line-height: 1.5;
+}
+
+ol li{
+  margin-bottom: 10px;
+}
+
+

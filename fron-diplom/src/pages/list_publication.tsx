@@ -47,8 +47,12 @@ const ListPublications = () => {
         ) {
           return;
         }
-        setPublications(publicationsData.publications);
-        setAllPublications(publicationsData.publications);
+        const normalizedPublications = publicationsData.publications.map((pub: any) => ({
+          ...pub,
+          text: Array.isArray(pub.text) ? pub.text : [pub.text],
+        }));
+        setPublications(normalizedPublications);
+        setAllPublications(normalizedPublications);
       } catch (error) {
         console.error("Ошибка при загрузке публикаций:", error);
       }
@@ -65,10 +69,11 @@ const ListPublications = () => {
   }, [searchParams, allPublications]);
 
   const categories = [
-    { id: 1, name: "Категория 1" },
-    { id: 2, name: "Категория 2" },
-    { id: 3, name: "Категория 3" },
-    { id: 4, name: "Категория 4" },
+    { id: 1, name: "Основы программирования" },
+    { id: 2, name: "Веб-разработка" },
+    { id: 3, name: "Машинное обучение и ИИ" },
+    { id: 4, name: "Автоматизация сложных бизнес-процессов" },
+    { id: 5, name: "Блокчейн" },
   ];
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -163,7 +168,7 @@ const ListPublications = () => {
   }
 
   return (
-    <div className="page">
+    <div className="page" style={{ minHeight: "calc(100vh - 140px)" }} >
       <div className="page_container list_authors">
         <div className="filters_container">
           <div className="item_filter">

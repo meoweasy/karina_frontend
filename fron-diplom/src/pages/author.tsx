@@ -6,6 +6,15 @@ import authorsData from "../datatest/authors.json";
 import { useParams } from "react-router-dom";
 import { Word } from "../components/word_cloud";
 
+interface Quote{
+  year: string;
+  href_publication: string;
+  name_publication: string;
+  href_quote: string;
+  name_quote: string
+  city_quote: string;
+}
+
 interface Author {
   id: number;
   fio_author: string;
@@ -36,6 +45,9 @@ interface Author {
   years_public_two: string;
   words: Word[];
   words2: Word[];
+  bio: string[];
+  grants: string[];
+  quotes: Quote[];
 }
 
 const AuthorPage = () => {
@@ -48,7 +60,29 @@ const AuthorPage = () => {
       const selectedAuthor = authorsData.authors.find(
         (author) => author.id === Number(id)
       );
-      setAuthor(selectedAuthor || null);
+      if (selectedAuthor) {
+        setAuthor({
+          ...selectedAuthor,
+          bio: selectedAuthor.bio ?? [],
+          grants: selectedAuthor.grants ?? [],
+          quotes: Array.isArray(selectedAuthor.quotes)
+            ? selectedAuthor.quotes
+            : selectedAuthor.quotes
+            ? [selectedAuthor.quotes]
+            : [
+                {
+                  year: "",
+                  href_publication: "",
+                  name_publication: "",
+                  href_quote: "",
+                  name_quote: "",
+                  city_quote: ""
+                }
+              ],
+        });
+      } else {
+        setAuthor(null);
+      }
       setIsHomepageOpen(true);
     }
   }, [id]);
@@ -85,8 +119,8 @@ const AuthorPage = () => {
         <AuthorHomepage
           id={author.id} 
           collab_name={author.collab_name}
-          popular_topic={author.categories[0]?.name ?? ""}
-          popular_word="Агенты"
+          popular_topic={author.categories[2]?.name ?? ""}
+          popular_word="Классификация"
           avr_cit="2"
           num_cit="92"
           num_public={author.num_public}
@@ -109,6 +143,9 @@ const AuthorPage = () => {
           words={author.words}
           words2={author.words2}
           setIsHomepageOpen={setIsHomepageOpen}
+          bio={author.bio}
+          grants={author.grants}
+          quotes={author.quotes}
         />
       ) : (
         <AuthorPublications authorId={Number(id)} />

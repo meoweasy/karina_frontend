@@ -92,10 +92,13 @@ const ListAuthor = () => {
   };
 
   const categories = [
-    { id: 1, name: "Категория 1" },
-    { id: 2, name: "Категория 2" },
-    { id: 3, name: "Категория 3" },
-    { id: 4, name: "Категория 4" },
+    { id: 1, name: "Инженерия знаний" },
+    { id: 2, name: "Анализ естественного языка" },
+    { id: 3, name: "Семантика" },
+    { id: 4, name: "Онтологии" },
+    { id: 5, name: "Автоматизация сложных бизнес-процессов" },
+    { id: 6, name: "Кибербезопасность" },
+    { id: 7, name: "Анализ данных" },
   ];
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -164,7 +167,7 @@ const ListAuthor = () => {
   const totalPages = Math.ceil(authors.length / ITEMS_PER_PAGE);
 
   return (
-    <div className="page">
+    <div className="page" style={{ minHeight: "calc(100vh - 140px)" }}>
       <div className="page_container list_authors">
         <div className="filters_container">
           <div className="item_filter">

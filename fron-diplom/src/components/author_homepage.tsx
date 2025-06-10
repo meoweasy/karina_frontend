@@ -21,7 +21,14 @@ import publicationsData from "../datatest/publications.json";
 import dayjs, { Dayjs } from "dayjs";
 import { Link } from "react-router-dom";
 
-const quotes = quotesData.quotes;
+interface Quote{
+  year: string;
+  href_publication: string;
+  name_publication: string;
+  href_quote: string;
+  name_quote: string
+  city_quote: string;
+}
 
 type AuthorHomepageProps = {
   id: number;
@@ -50,6 +57,9 @@ type AuthorHomepageProps = {
   words: Word[];
   words2: Word[];
   setIsHomepageOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  bio: string[];
+  grants: string[];
+  quotes: Quote[];
 };
 
 const AuthorHomepage = ({
@@ -79,6 +89,9 @@ const AuthorHomepage = ({
   words,
   words2,
   setIsHomepageOpen,
+  bio, 
+  grants,
+  quotes
 }: AuthorHomepageProps) => {
   const [allPublications, setAllPublications] = useState<Publication[]>([]);
 
@@ -144,18 +157,18 @@ const AuthorHomepage = ({
   ];
 
   const data2 = [
-    { month: "Январь", count: 9 },
-    { month: "Февраль", count: 8 },
-    { month: "Март", count: 12 },
-    { month: "Апрель", count: 10 },
-    { month: "Май", count: 14 },
-    { month: "Июнь", count: 11 },
-    { month: "Июль", count: 6 },
+    { month: "Январь", count: 1 },
+    { month: "Февраль", count: 0 },
+    { month: "Март", count: 0 },
+    { month: "Апрель", count: 0 },
+    { month: "Май", count: 0 },
+    { month: "Июнь", count: 0 },
+    { month: "Июль", count: 0 },
     { month: "Август", count: 0 },
-    { month: "Сентябрь", count: 6 },
-    { month: "Октябрь", count: 6 },
-    { month: "Ноябрь", count: 6 },
-    { month: "Декабрь", count: 6 },
+    { month: "Сентябрь", count: 0 },
+    { month: "Октябрь", count: 0 },
+    { month: "Ноябрь", count: 0 },
+    { month: "Декабрь", count: 0 },
   ];
 
   return (
@@ -392,26 +405,47 @@ const AuthorHomepage = ({
           <div className="text">Биография</div>
         </div>
         <div className="bio_author">
-          Меня зовут Алексей Иванов, я программист с более чем десятилетним
-          опытом в разработке программного обеспечения. С детства меня увлекали
-          компьютеры, я разбирал старую технику, пробовал писать простые
-          программы и постоянно искал способы автоматизировать рутинные задачи.
-          Мое увлечение переросло в профессию: я поступил в Московский
-          государственный университет на факультет вычислительной техники. Уже
-          на первых курсах я начал брать небольшие заказы по разработке
-          веб-приложений и программ, что помогло мне не только закрепить теорию
-          на практике, но и получить первый коммерческий опыт. После окончания
-          университета я устроился в одну из ведущих IT-компаний, где занимался
-          оптимизацией баз данных и разработкой API. Со временем я стал ведущим
-          разработчиком и начал участвовать в создании архитектуры крупных
-          проектов. Но мне всегда хотелось большего — я стремился к созданию
-          чего-то своего. В 2019 году я запустил стартап, связанный с
-          автоматизацией бизнес-процессов. Это был непростой путь, но благодаря
-          упорству и знаниям моя компания смогла привлечь инвестиции и выйти на
-          международный рынок. Я продолжаю развиваться, изучая новые технологии,
-          участвуя в конференциях и ведя технический блог. Верю, что
-          программирование — это не просто код, а инструмент, который меняет
-          мир.
+          {bio?.map((paragraph, index) => (
+            <div key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
+          ))}
+        </div>
+      </div>
+
+      <div
+        className="page_container bio"
+        style={{ marginTop: "0px", marginBottom: "100px" }}
+      >
+        <div className="author_title_cont">
+          <div className="rect_title"></div>
+          <div className="text">Гранты</div>
+        </div>
+        <div className="bio_author">
+          {grants?.map((paragraph, index) => (
+            <div key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
+          ))}
+        </div>
+      </div>
+
+      <div
+        className="page_container bio"
+        style={{ marginTop: "0px", marginBottom: "100px" }}
+      >
+        <div className="author_title_cont">
+          <div className="rect_title"></div>
+          <div className="text">Последние цитирование</div>
+        </div>
+        <div className="bio_author">
+          {quotes?.map((quote, index) => (
+            <div key={index} className="quotes__item">
+              <div className="quotes__item-year">{quote.year}</div>
+              <div className="quotes__item-text">
+                <a href={quote.href_publication} target="_blank" className="one-line-ellipsis">{quote.name_publication}</a>
+                <div> процитировано в статье </div>
+                <a className="two-line-ellipsis">{quote.name_quote}</a>
+                <div>, город {quote.city_quote}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

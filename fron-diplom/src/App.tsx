@@ -8,12 +8,14 @@ import PublicationPage from "./pages/publication";
 import ListAuthor from "./pages/list_author";
 import ListPublications from "./pages/list_publication";
 import PublicationsEdit from "./pages/publication_edit";
+import ScrollToTop from "./components/ScrollToTop.tsx";
 
 function App() {
   return (
     <Router>
       <Header />
       <div style={{marginTop: "70px"}}>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/author/:id" element={<AuthorPage />} />

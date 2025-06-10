@@ -17,6 +17,14 @@ interface Author {
   image_author: string;
 }
 
+interface Quote {
+  id: number;
+  text: string;
+  name_publication: string;
+  ref: string;
+  city_name: string;
+}
+
 interface Publication {
   id: number;
   image: string;
@@ -25,8 +33,25 @@ interface Publication {
   authors: Author[];
   publication_date: string;
   categories: Categories[];
-  text: string[];
+  text: string;
+  quotes?: Quote[];
 }
+
+const parseTextWithCitations = (html: string, quotes: Quote[] = []) => {
+  return html.replace(/\[cite:(\d+)\]/g, (_, id) => {
+    const quote = quotes.find((q) => q.id === Number(id));
+    if (!quote) return "";
+
+    const tooltipContent = `${quote.text} ${quote.name_publication}, ${quote.city_name}`;
+
+    return `
+      <span class="custom-tooltip-wrapper">
+        <span class="citation-circle">${quote.id}</span>
+        <span class="custom-tooltip">${tooltipContent}</span>
+      </span>
+    `;
+  });
+};
 
 const PublicationPage = () => {
   const { publicationid } = useParams<{ publicationid: string }>();
@@ -34,30 +59,11 @@ const PublicationPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        if (
-          !publicationsData ||
-          !publicationsData.publications ||
-          publicationsData.publications.length === 0
-        ) {
-          console.warn("Публикации пусты или не загружены");
-          return;
-        }
-
-        const filteredPublication = publicationsData.publications.find(
-          (publication: Publication) => publication.id === Number(publicationid)
-        );
-
-        if (filteredPublication) {
-          setPublication(filteredPublication);
-        } else {
-          console.warn("Публикация не найдена");
-        }
-      } catch (error) {
-        console.error("Ошибка при загрузке публикации:", error);
-      }
+      const filtered = publicationsData.publications.find(
+        (p: Publication) => p.id === Number(publicationid)
+      );
+      if (filtered) setPublication(filtered);
     };
-
     fetchData();
   }, [publicationid]);
 
@@ -71,22 +77,11 @@ const PublicationPage = () => {
         <img src={publication?.image} alt={publication?.title} />
       </div>
 
-      <div
-        className="page_container"
-        style={{
-          marginTop: "50px",
-          marginBottom: "100px",
-          height: "fit-content",
-        }}
-      >
+      <div className="page_container" style={{ marginTop: "50px", marginBottom: "100px" }}>
         <div className="list_author_container">
           {publication?.authors.map((author) => (
-            <Link
-              to={`/author/${author.id}`}
-              style={{ textDecoration: "none" }}
-              color="black"
-            >
-              <div key={author.id} className="card_author_cont">
+            <Link to={`/author/${author.id}`} key={author.id} style={{ textDecoration: "none" }}>
+              <div className="card_author_cont">
                 <div className="image_author">
                   <img src={author.image_author} alt={author.fio_author} />
                 </div>
@@ -95,20 +90,18 @@ const PublicationPage = () => {
               </div>
             </Link>
           ))}
-          <img
-            src={calendarimage}
-            alt="calendarimage"
-            width={"15px"}
-            style={{ marginRight: "0px", marginLeft: "auto" }}
-          />
+          <img src={calendarimage} alt="calendar" width="15px" style={{ marginLeft: "auto" }} />
           <div className="date">{publication?.publication_date}</div>
         </div>
 
         <div className="text_publication">
-          {publication?.text.map((block, index) => (
-            <div key={index} dangerouslySetInnerHTML={{ __html: block }} />
-          ))}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: parseTextWithCitations(publication?.text ?? "", publication?.quotes),
+            }}
+          />
         </div>
+
 
         <div className="category_list_cont">
           {publication?.categories.map((category) => (
@@ -117,6 +110,24 @@ const PublicationPage = () => {
             </div>
           ))}
         </div>
+
+        {publication?.quotes && publication.quotes.length > 0 && (
+          <div className="sources_section" style={{ marginTop: "50px" }}>
+            <div className="author_title_cont">
+              <div className="rect_title"></div>
+              <div className="text">Источники и цитирования</div>
+            </div>
+            <ol>
+              {publication.quotes.map((quote) => (
+                <li key={quote.id}>
+                  <a target="_blank" rel="noopener noreferrer">
+                    {quote.name_publication} — {quote.city_name}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
       </div>
 
       <div className="fon"></div>
